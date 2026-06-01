@@ -131,6 +131,9 @@
           class="p-2 h-100 rounded card-item bg-secondary-subtle"
           :class="`type-${coromon.element_type.toLowerCase()}`"
         >
+          <div class="fw-bold">
+            NO: {{ String(coromon.id).padStart(3, "0") }}
+          </div>
           <div class="row p-2">
             <img
               :src="`/coromonimage/icons/${coromon.name.toLowerCase()}.webp`"
@@ -142,9 +145,6 @@
             />
           </div>
           <div class="col-8 small">
-            <div class="fw-bold">
-              NO: {{ String(coromon.id).padStart(3, "0") }}
-            </div>
             <div class="">
               Name: {{ coromon.name.replace("Crimsonite", "").trim() }}
             </div>

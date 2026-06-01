@@ -4,16 +4,16 @@
       <button
         class="navbar-toggler"
         type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
+        @click="isNavOpen = !isNavOpen"
       >
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse" id="navbarNav">
+      <div
+        class="collapse navbar-collapse"
+        :class="{ show: isNavOpen }"
+        id="navbarNav"
+      >
         <ul class="navbar-nav">
           <li class="nav-item">
             <RouterLink to="/" class="nav-link" href="#"
@@ -51,7 +51,7 @@
           :title="apiStatusText"
         ></div>
         <button class="btn btn-light" @click="toggleDarkMode">
-          <i :class="isDark ? 'bi bi-moon-fill' : 'bi bi-sun-fill'"></i>
+          <i :class="isDark ? 'bi bi-sun-fill' : 'bi bi-moon-fill'"></i>
         </button>
       </div>
     </div>
@@ -60,6 +60,15 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const isNavOpen = ref(false);
+
+router.afterEach(() => {
+  isNavOpen.value = false;
+});
 
 const isDark = ref(localStorage.getItem("theme") === "dark");
 
@@ -71,6 +80,7 @@ document.documentElement.setAttribute(
 const toggleDarkMode = () => {
   isDark.value = !isDark.value;
   const theme = isDark.value ? "dark" : "light";
+
   document.documentElement.setAttribute("data-bs-theme", theme);
   localStorage.setItem("theme", theme);
 };
@@ -81,6 +91,7 @@ const apiStatusText = ref("Connecting to API...");
 const checkApi = async () => {
   try {
     const res = await fetch("https://coromonapi.onrender.com/coromon?limit=1");
+
     if (res.ok) {
       apiStatus.value = "status-online";
       apiStatusText.value = "API is online";

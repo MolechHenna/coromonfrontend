@@ -1,6 +1,5 @@
 <template>
   <div class="container mt-5">
-    <!-- Hero Section -->
     <div class="text-center mb-5">
       <img
         src="/coromonimage/icons/logo.webp"
@@ -36,9 +35,8 @@
       </p>
     </div>
 
-    <!-- Links -->
     <div class="row g-3 mb-5">
-      <div class="col-12 col-md-4">
+      <div class="col-12 col-md-3">
         <a
           href="https://store.steampowered.com/app/1218210/Coromon/"
           target="_blank"
@@ -51,7 +49,8 @@
           </div>
         </a>
       </div>
-      <div class="col-12 col-md-4">
+
+      <div class="col-12 col-md-3">
         <a
           href="https://coromon.wiki.gg"
           target="_blank"
@@ -64,7 +63,8 @@
           </div>
         </a>
       </div>
-      <div class="col-12 col-md-4">
+
+      <div class="col-12 col-md-3">
         <a
           href="https://www.youtube.com/playlist?list=PL4n7K4EAzBvacSWOClFqEgWtpRQcq6rOm"
           target="_blank"
@@ -77,6 +77,83 @@
           </div>
         </a>
       </div>
+
+      <div class="col-12 col-md-3">
+        <a href="#" class="text-decoration-none">
+          <div
+            class="rounded p-4 bg-secondary-subtle text-center h-100"
+            role="button"
+            @click="openSidebar"
+          >
+            <i class="bi bi-question-circle fs-1"></i>
+            <h5 class="fw-bold mt-2">What is this web app?</h5>
+            <p class="text-muted small">
+              Learn more about this web application
+            </p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div
+    class="offcanvas offcanvas-end"
+    tabindex="-1"
+    id="infoSidebar"
+    ref="infoSidebar"
+    aria-labelledby="infoSidebarLabel"
+  >
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="infoSidebarLabel">About This Web App</h5>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="offcanvas"
+      ></button>
+    </div>
+
+    <div class="offcanvas-body">
+      <p>
+        This web application is built using <strong>Vue.js</strong> and
+        <strong>Bootstrap</strong>, serving as the front-end interface for a
+        custom API developed by me.
+      </p>
+
+      <p>
+        The API is hosted on a free-tier service, which means it may enter a
+        <strong>cold start</strong> state after periods of inactivity. During
+        this time, the first request may take a few seconds to respond while the
+        server wakes up.
+      </p>
+
+      <p>
+        Once active, the application functions normally and provides real-time
+        access to Coromon-related data and resources.
+      </p>
     </div>
   </div>
 </template>
+
+<script scope>
+import { ref, onMounted } from "vue";
+import { Offcanvas } from "bootstrap";
+
+export default {
+  setup() {
+    const infoSidebar = ref(null);
+    let offcanvasInstance = null;
+
+    onMounted(() => {
+      offcanvasInstance = new Offcanvas(infoSidebar.value);
+    });
+
+    const openSidebar = () => {
+      offcanvasInstance?.show();
+    };
+
+    return {
+      infoSidebar,
+      openSidebar,
+    };
+  },
+};
+</script>
