@@ -132,7 +132,7 @@
           :class="`type-${coromon.element_type.toLowerCase()}`"
         >
           <div class="fw-bold">
-            NO: {{ String(coromon.id).padStart(3, "0") }}
+            {{ String(coromon.id).padStart(3, "0") }}
           </div>
           <div class="row p-2">
             <img
