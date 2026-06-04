@@ -7,9 +7,7 @@
         class="mb-3"
       />
       <h1 class="fw-bold">Welcome to the Coromon Database</h1>
-      <p class="text-muted">
-        A fan-made database and toolkit built by Molech Matt Henna
-      </p>
+      <p class="text-muted">A fan-made database and toolkit built by Matt</p>
       <div class="d-flex justify-content-center gap-3 mt-3">
         <RouterLink to="/database" class="btn btn-primary">
           <i class="bi bi-database"></i> Browse Database
